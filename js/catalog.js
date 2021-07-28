@@ -10,9 +10,13 @@ const cart = new Cart([]);
 function populateForm() {
 
   //TODO: Add an <option> tag inside the form's select for each product
-  const selectElement = document.getElementById('items');
+  let selectElement = document.getElementById('items');
   for (let i in Product.allProducts) {
 
+    let option = document.createElement('option');
+    selectElement.appendChild(option);
+    option.textContent = `${Product.allProducts[i].name}  ${Product.allProducts[i].filePath}`
+    
   }
 
 }
@@ -23,6 +27,8 @@ function populateForm() {
 function handleSubmit(event) {
 
   // TODO: Prevent the page from reloading
+
+  event.preventDefault();
 
   // Do all the things ...
   addSelectedItemToCart();
@@ -40,12 +46,31 @@ function addSelectedItemToCart() {
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+
+let hElement = document.createElement('h2');
+function updateCounter() {
+
+  let itemCount = document.getElementById('itemCount');
+  itemCount.appendChild(hElement);
+  hElement.textContent = `${cart.items}`;
+
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
+
+  let cartContents = document.getElementById('cartContents');
+
+  let ulCart = document.createElement('ul');
+  cartContents.appendChild(ulCart);
+
+  let liCart = document.createElement('li');
+  ulCart.appendChild(liCart);
+
+  liCart.textContent = ` ${item.product}  ${item.quantity}`;
+
 }
 
 // Set up the "submit" event listener on the form.
